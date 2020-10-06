@@ -10,20 +10,25 @@ class Employee {
 
     public function __construct($_name, $_lastName, $_code, $_type, $_salary){
         if (empty($_name) || !is_string($_name)){
-            die("Nome non valido");
+            throw new Exception("Nome non valido");
+            
         }
         $this->name = $_name;
         if (empty($_lastName) || !is_string($_lastName)){
-            die("Cognome non valido");
+            throw new Exception("Cognome non valido");
         }
         $this->lastName = $_lastName;
         if (strlen($_code) != 6){
-            die("Codice non valido");
+            throw new Exception("Codice non valido");
         }
         $this->code = $_code;
         $this->type = $_type;
         $this->salary = $_salary;
 
+    }
+
+    public function __toString(){
+        return "Nome: ".$this->name."<br>"."Cognome: ".$this->lastName;
     }
 
     public function annualSalary(){
@@ -49,12 +54,21 @@ class Employee {
     //set
 
     public function setName($_name){
+        if (empty($_name) || !is_string($_name)){
+            throw new Exception("Nome non valido");
+        }
         $this->name = $_name;
     }
     public function setLastName($_lastName){
+        if (empty($_lastName) || !is_string($_lastName)){
+            throw new Exception("Cognome non valido");
+        }
         $this->lastName = $_lastName;
     }
     public function setCode($_code){
+        if (strlen($_code) != 6){
+            throw new Exception("Codice non valido");
+        }
         $this->code = $_code;
     }
     public function setType($_type){
